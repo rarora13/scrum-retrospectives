@@ -1,4 +1,4 @@
-package in.simplygeek.restrospective.utils;
+package in.simplygeek.retrospective.utils;
 
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;

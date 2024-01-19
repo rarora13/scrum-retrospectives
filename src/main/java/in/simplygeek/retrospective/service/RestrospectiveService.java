@@ -1,4 +1,4 @@
-package in.simplygeek.restrospective.service;
+package in.simplygeek.retrospective.service;
 
 import java.util.Date;
 import java.util.Optional;
@@ -11,13 +11,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import in.simplygeek.restrospective.beans.FeedbackBean;
-import in.simplygeek.restrospective.beans.RetrospectiveBean;
-import in.simplygeek.restrospective.entities.Feedback;
-import in.simplygeek.restrospective.entities.Participant;
-import in.simplygeek.restrospective.entities.Retrospective;
-import in.simplygeek.restrospective.exceptions.IncorrectRequestException;
-import in.simplygeek.restrospective.repository.RestrospectiveRepository;
+import in.simplygeek.retrospective.beans.FeedbackBean;
+import in.simplygeek.retrospective.beans.RetrospectiveBean;
+import in.simplygeek.retrospective.entities.Feedback;
+import in.simplygeek.retrospective.entities.Participant;
+import in.simplygeek.retrospective.entities.Retrospective;
+import in.simplygeek.retrospective.exceptions.IncorrectRequestException;
+import in.simplygeek.retrospective.repository.RestrospectiveRepository;
 import jakarta.persistence.EntityNotFoundException;
 
 @Service

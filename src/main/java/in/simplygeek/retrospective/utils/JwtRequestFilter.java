@@ -1,4 +1,4 @@
-package in.simplygeek.restrospective.utils;
+package in.simplygeek.retrospective.utils;
 
 
 import java.io.IOException;
@@ -15,7 +15,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import in.simplygeek.restrospective.constants.CommonConstant;
+import in.simplygeek.retrospective.constants.CommonConstant;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import jakarta.servlet.FilterChain;

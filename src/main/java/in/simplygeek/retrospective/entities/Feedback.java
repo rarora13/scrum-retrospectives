@@ -1,4 +1,4 @@
-package in.simplygeek.restrospective.entities;
+package in.simplygeek.retrospective.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,14 +13,20 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Participant {
+public class Feedback {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column
     private String name;
-
-	@Column
-	private String participantUniqueId;
+    
+    @Column
+    private String body;
+    
+    @Column
+    private String type;
+    
+    @Column
+	private String feedbackUniqueId;
 }

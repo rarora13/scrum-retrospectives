@@ -1,4 +1,4 @@
-package in.simplygeek.restrospective.entities;
+package in.simplygeek.retrospective.entities;
 
 import java.util.Date;
 import java.util.Set;

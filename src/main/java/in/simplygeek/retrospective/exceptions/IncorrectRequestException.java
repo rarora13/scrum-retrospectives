@@ -1,4 +1,4 @@
-package in.simplygeek.restrospective.exceptions;
+package in.simplygeek.retrospective.exceptions;
 
 public class IncorrectRequestException extends RuntimeException {
 	/**

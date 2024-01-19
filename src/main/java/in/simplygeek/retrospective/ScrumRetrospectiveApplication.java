@@ -1,4 +1,4 @@
-package in.simplygeek.restrospective;
+package in.simplygeek.retrospective;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-public class RetrospectiveApplication {
+public class ScrumRetrospectiveApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RetrospectiveApplication.class, args);
+		SpringApplication.run(ScrumRetrospectiveApplication.class, args);
 	}
 	
 	@GetMapping

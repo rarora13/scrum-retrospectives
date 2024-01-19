@@ -1,4 +1,4 @@
-package in.simplygeek.restrospective.constants;
+package in.simplygeek.retrospective.constants;
 
 public final class CommonConstant {
 	
