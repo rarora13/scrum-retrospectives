@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 
 import in.simplygeek.retrospective.constants.CommonConstant;
-import in.simplygeek.retrospective.utils.JwtRequestFilter;
+import in.simplygeek.retrospective.filter.JwtRequestFilter;
 import jakarta.servlet.http.HttpServletRequest;
 
 @Configuration

@@ -1,11 +1,14 @@
-package in.simplygeek.retrospective.service;
+package in.simplygeek.retrospective.service.impl;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,18 +20,22 @@ import in.simplygeek.retrospective.entities.Feedback;
 import in.simplygeek.retrospective.entities.Participant;
 import in.simplygeek.retrospective.entities.Retrospective;
 import in.simplygeek.retrospective.exceptions.IncorrectRequestException;
-import in.simplygeek.retrospective.repository.RestrospectiveRepository;
+import in.simplygeek.retrospective.repository.RetrospectiveRepository;
+import in.simplygeek.retrospective.service.RetrospectiveService;
 import jakarta.persistence.EntityNotFoundException;
 
+
 @Service
-public class RestrospectiveService {
-    private final RestrospectiveRepository repository;
+public class DefaultRestrospectiveService implements RetrospectiveService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(DefaultRestrospectiveService.class);
+	
+    private final RetrospectiveRepository repository;
     
     @Autowired
-    public RestrospectiveService(RestrospectiveRepository retrospectiveRepository) {
+    public DefaultRestrospectiveService(RetrospectiveRepository retrospectiveRepository) {
         this.repository = retrospectiveRepository;
     }
-
 
 	/**
 	 * Get all Retrospective
@@ -39,6 +46,7 @@ public class RestrospectiveService {
 	 * @return
 	 */
 	public Page<Retrospective> getRetrospectives(Date date, String comparisonType, Pageable pageable) {
+		logger.info("starting get retrospective request {} , {} , {}",date,comparisonType,pageable);
 		if(date != null) {
 			switch (comparisonType.toLowerCase()) {
 			case "eq":
@@ -62,6 +70,7 @@ public class RestrospectiveService {
      * @return
      */
     public Retrospective getRetrospectiveById(Long id) {
+    	logger.info("starting get retrospective request {} ",id);
 		return repository.findById(id).
 				orElseThrow(()-> new EntityNotFoundException("Retrospective not found with id :"+id));
 	}
@@ -73,12 +82,18 @@ public class RestrospectiveService {
 	 * @return
 	 */
 	public Retrospective createRetrospective(RetrospectiveBean retrospective) {
+		logger.info("starting create new retrospective request {} ",retrospective);
 		if(retrospective != null && retrospective.getDate() != null && retrospective.getName() != null &&retrospective.getParticipants() != null 
 				&& !retrospective.getName().isBlank() && retrospective.getParticipants().size() > 0 ) {
 			Set<Participant> participants = retrospective.getParticipants().stream().map((p)-> {return new Participant(null, p, UUID.randomUUID().toString());}).collect(Collectors.toSet());
-			Retrospective entity = new Retrospective(null, retrospective.getName(), retrospective.getSummary(), retrospective.getDate(), participants, null, UUID.randomUUID().toString());
-			
-			return repository.save(entity);
+			Retrospective entity = new Retrospective(null, retrospective.getName(), retrospective.getSummary(), retrospective.getDate(), participants, new HashSet<Feedback>(), UUID.randomUUID().toString());
+			try {
+				entity = repository.save(entity);
+				
+				return entity;
+			}catch(Exception e) {
+				logger.error("error",e);
+			}
 		}
 		throw new IncorrectRequestException("Incomplete Retrospective details");
 		
@@ -92,6 +107,7 @@ public class RestrospectiveService {
 	 * @return
 	 */
 	public Retrospective updateRetrospective(Long id, Retrospective retrospective) {
+		logger.info("starting update retrospective request {}, {} ",id,retrospective);
 		Retrospective existingretrospective = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("retrospective not found with id: " + id));
 
@@ -113,6 +129,7 @@ public class RestrospectiveService {
 	 * @return
 	 */
 	public Retrospective createFeedback(Long retroId, FeedbackBean feedbackBean) {
+		logger.info("starting create feedback request {} ",retroId, feedbackBean);
 		
 		Retrospective retro = null;
 		if(retroId != null && retroId > 0) {
@@ -142,7 +159,8 @@ public class RestrospectiveService {
 	 * @return
 	 */
 	public Retrospective updateFeedback(Long retroId,Long feedbackId, FeedbackBean feedbackBean) {
-
+		logger.info("starting update feedback request {} ",retroId,feedbackId, feedbackBean);
+		
 		Retrospective retro = null;
 		Feedback feedback = null;
 		if(retroId != null && retroId > 0) {
@@ -195,6 +213,8 @@ public class RestrospectiveService {
 	
 
 	public void deleteRetrospective(Long id) {
+		logger.info("starting delete retrospective request {} ",id);
+		
 		/* Check if the retrospective with the given id exists in the database */
         Retrospective existingretrospective = repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("retrospective not found with id: " + id));

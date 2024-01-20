@@ -1,12 +1,14 @@
 package in.simplygeek.retrospective.beans;
 
-import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.ToString;
 
 @NoArgsConstructor
-@Getter
-@Setter
+@AllArgsConstructor
+@Data
+@ToString
 public class FeedbackBean {
 
     private String name;

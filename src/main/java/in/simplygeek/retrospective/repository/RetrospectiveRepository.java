@@ -11,7 +11,7 @@ import in.simplygeek.retrospective.entities.Retrospective;
 
 
 @Repository
-public interface RestrospectiveRepository extends JpaRepository<Retrospective, Long> {
+public interface RetrospectiveRepository extends JpaRepository<Retrospective, Long> {
 	Page<Retrospective> findAll(Pageable pageable);
 	Page<Retrospective> findByDateEquals(Date date, Pageable pageable);
     Page<Retrospective> findByDateGreaterThan(Date date, Pageable pageable);
