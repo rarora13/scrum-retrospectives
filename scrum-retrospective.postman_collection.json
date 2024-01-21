@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "b901daaa-8f96-4c15-882c-25abba050c6e",
+		"name": "scrum-retrospective",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25866042"
+	},
+	"item": [
+		{
+			"name": "add retrospective",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth_header}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"retro-2\",\r\n    \"summary\": \"reviewing the spring no 125\",\r\n    \"date\": \"2024-01-21\",\r\n    \"participants\": [\"Mathews\",\"John\",\"Stephen\"]\r\n}"
+				},
+				"url": {
+					"raw": "{{server-url}}/api/v1/retrospectives",
+					"host": [
+						"{{server-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"retrospectives"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add feedback",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth_header}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Stephen\",\r\n    \"body\": \"poor collboration between teams\",\r\n    \"type\": \"NEG\"\r\n}"
+				},
+				"url": {
+					"raw": "{{server-url}}/api/v1/retrospectives/7/feedback",
+					"host": [
+						"{{server-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"retrospectives",
+						"7",
+						"feedback"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update retrospective",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth_header}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"John\",\r\n    \"body\": \"good collboration between teams\",\r\n    \"type\": \"POS\"\r\n}"
+				},
+				"url": {
+					"raw": "{{server-url}}/api/v1/retrospectives/7/feedback/1",
+					"host": [
+						"{{server-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"retrospectives",
+						"7",
+						"feedback",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get retros by date",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth_header}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{server-url}}/api/v1/retrospectives?comparisonType=gt&date=2024-01-18",
+					"host": [
+						"{{server-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"retrospectives"
+					],
+					"query": [
+						{
+							"key": "comparisonType",
+							"value": "gt"
+						},
+						{
+							"key": "date",
+							"value": "2024-01-18"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all retros",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{{auth_header}}",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/xml",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{server-url}}/api/v1/retrospectives",
+					"host": [
+						"{{server-url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"retrospectives"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "server-url",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "auth_header",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
