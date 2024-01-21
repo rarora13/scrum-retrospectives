@@ -1,0 +1,14 @@
+# docker-compose.yml
+version: '3'
+services:
+  your-spring-boot-app:
+    image: scrum-retrospective:latest
+    ports:
+      - "8078:8080"
+    environment:
+      - JAVA_OPTS=-Xmx2g
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '2G'
