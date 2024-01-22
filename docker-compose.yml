@@ -4,7 +4,7 @@ services:
   your-spring-boot-app:
     image: scrum-retrospective:latest
     ports:
-      - "8078:8080"
+      - "8078:8078"
     environment:
       - JAVA_OPTS=-Xmx2g
     deploy:

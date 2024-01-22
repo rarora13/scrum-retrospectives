@@ -195,7 +195,7 @@
 					}
 				],
 				"url": {
-					"raw": "{{server-url}}/api/v1/retrospectives",
+					"raw": "{{server-url}}/api/v1/retrospectives?page=0&ize=5",
 					"host": [
 						"{{server-url}}"
 					],
@@ -203,6 +203,16 @@
 						"api",
 						"v1",
 						"retrospectives"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "ize",
+							"value": "5"
+						}
 					]
 				}
 			},
